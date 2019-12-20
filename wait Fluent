@@ -1,0 +1,15 @@
+public WebElement waitFluent(String elementName) {
+        try {
+            for (int i = 0; i < 15; i++) {
+                Thread.sleep(1000);
+                if (getControlDriver(elementName).isPresent())
+                    break;
+                else
+                    System.out.println("wait for: " + elementName + "::Time in Sec: " + i);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            return elementsan;
+        }
+    }
