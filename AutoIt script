@@ -1,0 +1,36 @@
+file save
+Runtime.getRuntime().exec(input.get("Type@AutoITLocation") + " " + filepath);
+
+WinWait("Internet Explorer")
+WinActivate ("Internet Explorer")
+Send("{TAB}")
+Send("{TAB}")
+Send("{ENTER}")
+
+WinWait("Save As")
+; activate Save As window
+WinActivate("Save As")
+ControlFocus("Save As","","Edit1")
+ControlSetText("Save As","","Edit1",$CmdLine[1])
+Sleep(2000)
+ControlClick("Save As","","Button2")
+
+
+Popup cred
+WinWaitActive("Windows Security")
+Send($CmdLine[1])
+Send("{TAB}")
+Send($CmdLine[2])
+Send("{ENTER}")
+
+
+upload
+If ControlFocus("Open","","Edit1" ) Then
+ControlFocus("Open","","Edit1" )
+ControlSetText("Open","","Edit1",$CmdLine[1])
+ControlClick("Open","","Button1")
+Else
+ControlFocus("Choose File to Upload","","Edit1" )
+ControlSetText("Choose File to Upload","","Edit1",$CmdLine[1])
+ControlClick("Choose File to Upload","","Button1")
+EndIf
