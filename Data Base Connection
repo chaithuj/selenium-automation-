@@ -1,0 +1,44 @@
+/*
+ * Creation : 7 May 2020
+ */
+package running;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class databaseConnection {
+
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection con = DriverManager.getConnection("jdbc:oracle:thin:edm/edmindu0@yvas8530:1521:edm");
+
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT x.*,x.ROWID FROM EDM.EDMQT590 x WHERE x.VERSION IN ('1C10A5EAW604A010')");
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        System.out.println("columnsNumber count:- " + columnsNumber);
+        for (int i = 1; i < columnsNumber; i++) {
+
+            System.out.print(rsmd.getColumnName(i));
+            System.out.print(" , ");
+        }
+        System.out.println("");
+
+        while (rs.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1)
+                    System.out.print(",");
+                String columnValue = rs.getString(i);
+                System.out.print(columnValue);
+            }
+            System.out.println("");
+        }
+        con.close();
+    }
+}
+https://www.codejava.net/java-se/jdbc/connect-to-oracle-database-via-jdbc#DownloadDriver
