@@ -1,0 +1,3 @@
+            String path = "C:\\Users\\E531394\\Desktop\\response.txt";
+            BufferedReader reader = new BufferedReader(new FileReader(new File(path)));
+            String result = reader.lines().collect(Collectors.joining(System.lineSeparator()));
