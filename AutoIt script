@@ -34,3 +34,35 @@ ControlFocus("Choose File to Upload","","Edit1" )
 ControlSetText("Choose File to Upload","","Edit1",$CmdLine[1])
 ControlClick("Choose File to Upload","","Button1")
 EndIf
+
+
+upload
+If WinExists("[TITLE:Open; CLASS:#32770]") Then
+WinWaitActive("[TITLE:Open; CLASS:#32770]")
+Send($CmdLine[1])
+Sleep(1)
+ControlClick("Open","","Button1" )
+ElseIf WinExists("[TITLE:Choose File to Upload]") Then
+WinWaitActive("[TITLE:Choose File to Upload]")
+Send($CmdLine[1])
+Sleep(1)
+ControlClick("Choose File to Upload","","Button1")
+	EndIf
+
+cred
+Sleep(10000)
+If WinExists("[TITLE:Windows Security; CLASS:Credential Dialog Xaml Host]") Then
+WinWaitActive("[TITLE:Windows Security; CLASS:Credential Dialog Xaml Host]")
+Send($CmdLine[1])
+Send("{TAB}")
+Sleep(1)
+Send($CmdLine[2])
+Send("{ENTER}")
+ElseIf WinExists("[TITLE:panier.preprod.inetpsa.com/privateLogin.do ; CLASS:Chrome_WidgetWin_1]") Then
+WinWaitActive("[TITLE:panier.preprod.inetpsa.com/privateLogin.do ; CLASS:Chrome_WidgetWin_1]")
+Send($CmdLine[1])
+Send("{TAB}")
+Sleep(1)
+Send($CmdLine[2])
+Send("{ENTER}")
+EndIf
